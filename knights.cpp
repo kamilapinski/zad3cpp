@@ -41,6 +41,17 @@ class Tournament {
             // done
         }
 
+        friend std::ostream& operator<<(std::ostream& os, const Tournament& tournament) {
+            for (const Knight knight : tournament.fight_list) {
+                os << "+ " << knight << "\n";
+            }
+            for (const Knight knight : tournament.lost_list) {
+                os << "- " << knight << "\n";
+            }
+            os << "=\n";
+            return os;
+        }
+
         Tournament& operator=(const Tournament& that) {
             if (this != &that) {
                 fight_list = that.fight_list;
@@ -104,17 +115,6 @@ class Tournament {
             return fight_list.size() + lost_list.size();
             // chociażby dlatego lost_list nie jest typu forward_list
         }
-
-        void print() {
-            for (const Knight knight : fight_list) {
-                std::cout << "+ " << knight << "\n";
-            }
-            for (const Knight knight : lost_list) {
-                std::cout << "- " << knight << "\n";
-            }
-            std::cout << "=\n";
-        }
-
 };
 
 constexpr std::pair<int, int> max_diff_classes(std::initializer_list<Knight> list) {
