@@ -22,13 +22,6 @@ constexpr Knight Knight::operator+(const Knight& k) {
     return Knight(total_gold, best_armor_class, best_weapon_class);
 } // DONE
 
-/* być może niepotrzebne ze względu na operator <=>
-constexpr bool Knight::operator==(const Knight& other) {
-
-    return (*this <=> other) == std::strong_ordering::equal;
-} // DONE
-*/
-
 constexpr const std::strong_ordering Knight::operator<=>(const Knight& other) const { // Nie wiem czy da się to zrobić bardziej elegancko.
     bool thisWins = (this->weapon_class > other.armour_class && this->armour_class >= other.weapon_class);
     bool otherWins = (other.weapon_class > this->armour_class && other.armour_class >= this->weapon_class);
