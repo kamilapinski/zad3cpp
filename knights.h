@@ -82,11 +82,11 @@ class Knight {
         } // DONE
 
         constexpr Knight operator+(const Knight& k) const {
-            size_t total_gold = std::min(gold + k.gold, MAX_GOLD);
-            size_t best_armor_class = std::max(armour_class, k.armour_class);
+            size_t total_gold = std::min(gold + k.gold, MAX_GOLD); // moze byc problem gdy gold + k.gold > SIZE_MAX
             size_t best_weapon_class = std::max(weapon_class, k.weapon_class);
+            size_t best_armor_class = std::max(armour_class, k.armour_class);
 
-            return Knight(total_gold, best_armor_class, best_weapon_class);
+            return Knight(total_gold, best_weapon_class, best_armor_class);
         } // DONE
 
         constexpr const std::strong_ordering operator<=>(const Knight& other) const {
@@ -160,6 +160,6 @@ class Tournament {
         }
 };
 
-constexpr std::pair<int, int> max_diff_classes(std::initializer_list<Knight> list);
+constexpr std::pair<long unsigned int, long unsigned int> max_diff_classes(std::initializer_list<Knight> list);
 
 #endif // KNIGHTS_H
