@@ -13,16 +13,16 @@ using std::size_t;
 class Knight {
     private:        
         size_t gold;
-        size_t armour_class;
         size_t weapon_class;
+        size_t armour_class;
         
     public:
         Knight() = delete;
         static constexpr size_t MAX_GOLD = SIZE_MAX;
-        constexpr Knight(size_t g, size_t a, size_t w) :
+        constexpr Knight(size_t g, size_t w, size_t a) :
             gold(g), 
-            armour_class(a), 
-            weapon_class(w) 
+            weapon_class(w),
+            armour_class(a) 
         { 
         }
 
@@ -31,16 +31,45 @@ class Knight {
         constexpr Knight(Knight&&) = default;
         constexpr Knight& operator= (Knight&&) = default;
 
-        constexpr size_t get_gold();
-        constexpr size_t get_armour_class();
-        constexpr size_t get_weapon_class();
+        constexpr size_t get_gold() const {
+            return gold;
+        }
+        constexpr size_t get_armour_class() const {
+            return armour_class;
+        }
+        constexpr size_t get_weapon_class() const {
+            return weapon_class;
+        }
         
-        constexpr size_t give_gold();
-        constexpr void take_gold(size_t amount);
-        constexpr void change_weapon(size_t newWeaponClass);
-        constexpr size_t give_up_weapon();
-        constexpr void change_armour(size_t newArmorClass);
-        constexpr size_t take_off_armour();
+        constexpr size_t give_gold() {
+            size_t tmp_gold = gold;
+            gold = 0;
+            return tmp_gold;
+        }
+
+        constexpr void take_gold(size_t amount) {
+            gold += amount;
+        }
+ 
+        constexpr void change_weapon(size_t new_weapon_class) {
+            weapon_class = new_weapon_class;
+        }
+
+        constexpr size_t give_up_weapon() {
+            //size_t temp_weapon = weapon_class;
+            weapon_class = 0;
+            return weapon_class;
+        }
+
+        constexpr void change_armour(size_t new_armour_class) {
+            armour_class = new_armour_class;
+        }
+
+        constexpr size_t take_off_armour() {
+            size_t temp_armour = armour_class;
+            armour_class = 0;
+            return temp_armour;
+        }
 
         constexpr Knight& operator+=(Knight& rhs);
         constexpr Knight operator+(const Knight& k);

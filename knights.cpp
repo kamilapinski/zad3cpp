@@ -1,50 +1,5 @@
 #include "knights.h"
 
-constexpr size_t Knight::get_gold() {
-    
-    return gold;
-}
-
-constexpr size_t Knight::get_armour_class() {
-    
-    return armour_class;
-}
-
-constexpr size_t Knight::get_weapon_class() {
-
-    return weapon_class;
-}
-
-constexpr size_t Knight::give_gold() {
-    size_t tmp_gold = gold;
-    gold = 0;
-    return tmp_gold;
-}
-
-constexpr void Knight::take_gold(size_t amount) {
-    gold += amount;
-}
-
-constexpr void Knight::change_weapon(size_t new_weapon_class) {
-    weapon_class = new_weapon_class;
-}
-
-constexpr size_t Knight::give_up_weapon() {
-    //size_t temp_weapon = weapon_class;
-    weapon_class = 0;
-    return weapon_class;
-}
-
-constexpr void Knight::change_armour(size_t new_armour_class) {
-    armour_class = new_armour_class;
-}
-
-constexpr size_t Knight::take_off_armour() {
-    size_t temp_armour = armour_class;
-    armour_class = 0;
-    return temp_armour;
-}
-
 constexpr Knight & Knight::operator+=(Knight &rhs) {
     take_gold(rhs.give_gold()); // Chyba tego oczekiwali.
 
