@@ -1,6 +1,8 @@
 #ifndef KNIGHTS_H
 #define KNIGHTS_H
 
+#include <initializer_list>
+
 class Knight {
 
 };
@@ -14,4 +16,4 @@ class Tournament {
         Tournament& operator=(Tournament&& that);
 };
 
-#endif KNIGHT_H
+#endif // KNIGHTS_H
