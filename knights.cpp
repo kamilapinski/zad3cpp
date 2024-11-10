@@ -92,9 +92,3 @@ size_t Tournament::size() const {
     // chociażby dlatego lost_list nie jest typu forward_list
 }
 
-// MAX_DIFF_CLASSES
-
-constexpr std::pair<long unsigned int, long unsigned int> max_diff_classes(std::initializer_list<Knight> list) {
-    // TODO
-    return {0, 0};
-}

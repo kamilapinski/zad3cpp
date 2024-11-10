@@ -160,6 +160,18 @@ class Tournament {
         }
 };
 
-constexpr std::pair<long unsigned int, long unsigned int> max_diff_classes(std::initializer_list<Knight> list);
+constexpr std::pair<size_t, size_t> max_diff_classes(std::initializer_list<Knight> list) {
+    std::pair<size_t, size_t> ans_pair = {0, 0};
+    
+    for (auto knight : list) {
+        std::pair<size_t, size_t> curr_pair = {knight.get_weapon_class(), knight.get_armour_class()};
+
+        if ((curr_pair.first - curr_pair.second) > (ans_pair.first - ans_pair.second)) {
+            ans_pair = curr_pair;
+        }
+    }
+
+    return ans_pair;
+}
 
 #endif // KNIGHTS_H
