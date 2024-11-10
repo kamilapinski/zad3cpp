@@ -1,0 +1,29 @@
+# Pliki kompilacji
+/build/
+/bin/
+/obj/
+
+# Pliki tymczasowe
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.out
+
+# Pliki edytora
+*.log
+*.swp
+*~
+.vscode/
+.idea/
+
+# Pliki CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Pliki systemowe
+.DS_Store
+Thumbs.db
