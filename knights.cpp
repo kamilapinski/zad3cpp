@@ -1,49 +1,5 @@
 #include "knights.h"
 
-/* być może niepotrzebne ze względu na operator <=>
-constexpr bool Knight::operator==(const Knight& other) {
-
-    return (*this <=> other) == std::strong_ordering::equal;
-} // DONE
-*/
-
-constexpr const std::strong_ordering Knight::operator<=>(const Knight& other) const { // Nie wiem czy da się to zrobić bardziej elegancko.
-    bool thisWins = (this->weapon_class > other.armour_class && this->armour_class >= other.weapon_class);
-    bool otherWins = (other.weapon_class > this->armour_class && other.armour_class >= this->weapon_class);
-
-    if (thisWins && !otherWins) {
-        
-        return std::strong_ordering::greater;
-    }
-    if (otherWins && !thisWins) {
-
-        return std::strong_ordering::less;
-    }
-
-    // Obaj rycerze mają broń silniejszą od zbroi przeciwnika.
-    if (this->weapon_class > other.armour_class && other.weapon_class > this->armour_class) {
-        if (this->armour_class != other.armour_class) {
-        
-            return this->armour_class <=> other.armour_class;
-        }
-
-        return this->weapon_class <=> other.weapon_class;
-    }
-
-    return std::strong_ordering::equal;
-} // DONE
-
-constexpr bool Knight::operator>(const Knight& other) const {
-    return (*this <=> other) == std::strong_ordering::greater;
-}
-constexpr bool Knight::operator<(const Knight& other) const {
-    return (*this <=> other) == std::strong_ordering::less;
-}
-constexpr bool Knight::operator==(const Knight& other) const {
-    return (*this <=> other) == std::strong_ordering::equal;
-}
-
-
 // TOURNAMENT
 
 void Tournament::payoff(Knight& winner, Knight& loser) {

@@ -41,17 +41,17 @@ class Knight {
             return weapon_class;
         }
         
-        size_t give_gold() {
+        constexpr size_t give_gold() {
             size_t tmp_gold = gold;
             gold = 0;
             return tmp_gold;
         }
 
-        void take_gold(size_t amount) {
+        constexpr void take_gold(size_t amount) {
             gold += amount;
         }
  
-        void change_weapon(size_t new_weapon_class) {
+        constexpr void change_weapon(size_t new_weapon_class) {
             weapon_class = new_weapon_class;
         }
 
@@ -61,11 +61,11 @@ class Knight {
             return temp_weapon;
         }
 
-        void change_armour(size_t new_armour_class) {
+        constexpr void change_armour(size_t new_armour_class) {
             armour_class = new_armour_class;
         }
 
-        size_t take_off_armour() {
+        constexpr size_t take_off_armour() {
             size_t temp_armour = armour_class;
             armour_class = 0;
             return temp_armour;
