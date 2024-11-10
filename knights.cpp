@@ -130,7 +130,7 @@ size_t Tournament::size() const {
 
 // MAX_DIFF_CLASSES
 
-constexpr std::pair<int, int> max_diff_classes(std::initializer_list<Knight> list) {
+constexpr std::pair<long unsigned int, long unsigned int> max_diff_classes(std::initializer_list<Knight> list) {
     // TODO
     return {0, 0};
 }
