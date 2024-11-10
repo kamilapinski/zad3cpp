@@ -2,6 +2,13 @@
 #define KNIGHTS_H
 
 #include <initializer_list>
+#include <stdint.h>
+#include <compare>
+#include <list>
+#include <ostream>
+
+using std::size_t;
+
 
 class Knight {
     private:        
@@ -37,8 +44,13 @@ class Knight {
 
         constexpr Knight& operator+=(Knight& rhs);
         constexpr Knight operator+(const Knight& k);
-        constexpr bool operator==(const Knight& other); 
-        constexpr std::strong_ordering operator<=>(const Knight& other);
+        //constexpr bool operator==(const Knight& other); 
+        constexpr const std::strong_ordering operator<=>(const Knight& other) const;
+
+        constexpr bool operator>(const Knight& other) const;
+        constexpr bool operator<(const Knight& other) const;
+        constexpr bool operator==(const Knight& other) const;
+
         friend std::ostream& operator<<(std::ostream& os, const Knight& knight) {
             os << "(" << knight.gold << ", " << knight.weapon_class
                << ", " << knight.armour_class << ")";
@@ -49,12 +61,36 @@ class Knight {
 constexpr Knight TRAINEE_KNIGHT(0, 1, 1);
 
 class Tournament {
+    private:
+        std::list<Knight> fight_list;
+        std::list<Knight> lost_list;
+
+        void payoff(Knight& winner, Knight& loser);
+
     public:
         Tournament(std::initializer_list<Knight> s);
         Tournament(const Tournament& that);
         Tournament(Tournament&& that);
         Tournament& operator=(const Tournament& that);
         Tournament& operator=(Tournament&& that);
+        Tournament& operator+=(const Knight& knight);
+        Tournament& operator-=(const Knight& knight);
+        const std::list<Knight>::iterator play();
+        const std::list<Knight>::iterator no_winner();
+        size_t size() const;
+
+        friend std::ostream& operator<<(std::ostream& os, const Tournament& tournament) {
+            for (const Knight knight : tournament.fight_list) {
+                os << "+ " << knight << "\n";
+            }
+            for (const Knight knight : tournament.lost_list) {
+                os << "- " << knight << "\n";
+            }
+            os << "=\n";
+            return os;
+        }
 };
+
+constexpr std::pair<int, int> max_diff_classes(std::initializer_list<Knight> list);
 
 #endif // KNIGHTS_H
