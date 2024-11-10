@@ -55,10 +55,10 @@ class Knight {
             weapon_class = new_weapon_class;
         }
 
-        size_t give_up_weapon() {
-            //size_t temp_weapon = weapon_class;
+        constexpr size_t give_up_weapon() {
+            size_t temp_weapon = weapon_class;
             weapon_class = 0;
-            return weapon_class;
+            return temp_weapon;
         }
 
         void change_armour(size_t new_armour_class) {
@@ -71,14 +71,54 @@ class Knight {
             return temp_armour;
         }
 
-        constexpr Knight& operator+=(Knight& rhs);
-        constexpr Knight operator+(const Knight& k);
-        //constexpr bool operator==(const Knight& other); 
-        constexpr const std::strong_ordering operator<=>(const Knight& other) const;
+        constexpr Knight& operator+=(Knight& rhs)  {
+            take_gold(rhs.give_gold()); // Chyba tego oczekiwali.
 
-        constexpr bool operator>(const Knight& other) const;
-        constexpr bool operator<(const Knight& other) const;
-        constexpr bool operator==(const Knight& other) const;
+            (rhs.weapon_class > this->weapon_class) ? change_weapon(rhs.give_up_weapon()) : change_weapon(this->weapon_class);
+
+            (rhs.armour_class > this->armour_class) ? change_armour(rhs.take_off_armour()) : change_armour(this->armour_class);
+
+            return *this;
+        } // DONE
+
+        constexpr Knight operator+(const Knight& k) const {
+            size_t total_gold = std::min(gold + k.gold, MAX_GOLD);
+            size_t best_armor_class = std::max(armour_class, k.armour_class);
+            size_t best_weapon_class = std::max(weapon_class, k.weapon_class);
+
+            return Knight(total_gold, best_armor_class, best_weapon_class);
+        } // DONE
+
+        constexpr const std::strong_ordering operator<=>(const Knight& other) const {
+            bool this_wins = (this->weapon_class > other.armour_class && this->armour_class >= other.weapon_class);
+            bool other_wins = (other.weapon_class > this->armour_class && other.armour_class >= this->weapon_class);
+
+            return (this_wins) ?
+                (
+                (!other_wins) ? 
+                    std::strong_ordering::greater
+                :
+                    ((this->weapon_class == other.weapon_class) ? this->armour_class <=> other.armour_class : this->weapon_class <=> other.weapon_class)
+                )
+            :
+                (other_wins) ?
+                    std::strong_ordering::less
+                :
+                    ((this->weapon_class == other.weapon_class) ? this->armour_class <=> other.armour_class : this->weapon_class <=> other.weapon_class)
+            ;
+        }
+
+        constexpr bool operator>(const Knight& other) const {
+            return (*this <=> other) == std::strong_ordering::greater;
+        }
+
+        constexpr bool operator<(const Knight& other) const {
+            return (*this <=> other) == std::strong_ordering::less;
+        }
+
+        constexpr bool operator==(const Knight& other) const {
+            return (*this <=> other) == std::strong_ordering::equal;
+        }
 
         friend std::ostream& operator<<(std::ostream& os, const Knight& knight) {
             os << "(" << knight.gold << ", " << knight.weapon_class
