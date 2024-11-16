@@ -9,12 +9,11 @@ void Tournament::payoff(Knight& winner, Knight& loser) {
 }
 
 Tournament::Tournament(std::initializer_list<Knight> s) {
-    if (s.size() == 0) fight_list.push_back(TRAINEE_KNIGHT);
-    else {
-        for (auto knight : s) {
-            fight_list.push_back(knight);
-        }
+    for (auto knight : s) {
+        fight_list.push_back(knight);
     }
+
+    if (s.size() == 0) fight_list.push_back(TRAINEE_KNIGHT);
 }
 
 Tournament::Tournament(const Tournament& that) : fight_list(that.fight_list), lost_list(that.lost_list) {
