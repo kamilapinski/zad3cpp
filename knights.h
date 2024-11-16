@@ -150,10 +150,10 @@ class Tournament {
 
         friend std::ostream& operator<<(std::ostream& os, const Tournament& tournament) {
             for (const Knight knight : tournament.fight_list) {
-                os << "+ " << knight << "\n";
+                os << "+ " << knight;
             }
             for (const Knight knight : tournament.lost_list) {
-                os << "- " << knight << "\n";
+                os << "- " << knight;
             }
             os << "=\n";
             return os;
