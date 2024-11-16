@@ -5,7 +5,6 @@
 void Tournament::payoff(Knight& winner, Knight& loser) {
     winner += loser; // Knight musi mieć zdefiniowany ten operator
     fight_list.push_back(winner);
-    lost_list.clear(); // to jest dziwne, ale takie jest wymaganie, żeby przy każdej zmianie listy pretendentów czyścić przegranych
     lost_list.push_front(loser);
 }
 
@@ -64,8 +63,6 @@ const std::list<Knight>::iterator Tournament::play() {
         fight_list.pop_front();
         Knight second = fight_list.front();
         fight_list.pop_front();
-
-        lost_list.clear(); // to jest dziwne, ale takie jest wymaganie, żeby przy każdej zmianie listy pretendentów czyścić przegranych
 
         if (first > second) // Knight musi mieć zdef. ten operator
             payoff(first, second);
