@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <compare>
 #include <list>
-#include <ostream>
+#include <iostream>
 
 using std::size_t;
 
@@ -98,13 +98,13 @@ class Knight {
                 (!other_wins) ? 
                     std::strong_ordering::greater
                 :
-                    ((this->weapon_class == other.weapon_class) ? this->armour_class <=> other.armour_class : this->weapon_class <=> other.weapon_class)
+                    ((this->armour_class == other.armour_class) ? this->weapon_class <=> other.weapon_class : this->armour_class <=> other.armour_class)
                 )
             :
                 (other_wins) ?
                     std::strong_ordering::less
                 :
-                    ((this->weapon_class == other.weapon_class) ? this->armour_class <=> other.armour_class : this->weapon_class <=> other.weapon_class)
+                    ((this->armour_class == other.armour_class) ? this->weapon_class <=> other.weapon_class : this->armour_class <=> other.armour_class)
             ;
         }
 
