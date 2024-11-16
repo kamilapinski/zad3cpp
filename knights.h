@@ -121,8 +121,8 @@ class Knight {
         }
 
         friend std::ostream& operator<<(std::ostream& os, const Knight& knight) {
-            os << "(" << knight.gold << ", " << knight.weapon_class
-               << ", " << knight.armour_class << ")";
+            os << "(" << knight.gold << " gold, " << knight.weapon_class
+               << "weapon class, " << knight.armour_class << " armour class)\n";
             return os;
         }
 };
