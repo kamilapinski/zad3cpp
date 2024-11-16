@@ -48,7 +48,7 @@ class Knight {
         }
 
         constexpr void take_gold(size_t amount) {
-            gold += amount;
+            gold = (gold > MAX_GOLD - amount) ? MAX_GOLD : gold + amount;
         }
  
         constexpr void change_weapon(size_t new_weapon_class) {
@@ -82,7 +82,7 @@ class Knight {
         } // DONE
 
         constexpr Knight operator+(const Knight& k) const {
-            size_t total_gold = std::min(gold + k.gold, MAX_GOLD); // moze byc problem gdy gold + k.gold > SIZE_MAX
+            size_t total_gold = (gold > MAX_GOLD - k.gold) ? MAX_GOLD : gold + k.gold;
             size_t best_weapon_class = std::max(weapon_class, k.weapon_class);
             size_t best_armor_class = std::max(armour_class, k.armour_class);
 
