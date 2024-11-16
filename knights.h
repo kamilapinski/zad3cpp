@@ -104,7 +104,10 @@ class Knight {
                 (other_wins) ?
                     std::strong_ordering::less
                 :
-                    ((this->armour_class == other.armour_class) ? this->weapon_class <=> other.weapon_class : this->armour_class <=> other.armour_class)
+                    ((this->armour_class >= other.weapon_class && other.armour_class >= this->weapon_class) ?
+                    std::strong_ordering::equal
+                    :
+                    ((this->armour_class == other.armour_class) ? this->weapon_class <=> other.weapon_class : this->armour_class <=> other.armour_class))
             ;
         }
 
