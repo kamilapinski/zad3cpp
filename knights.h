@@ -18,7 +18,7 @@ class Knight {
         size_t armour_class;
         
     public:
-        Knight() = delete;
+        //Knight() = delete;
         static constexpr size_t MAX_GOLD = SIZE_MAX;
         constexpr Knight(size_t g, size_t w, size_t a) :
             gold(g), 
@@ -129,6 +129,10 @@ class Knight {
                << " weapon class, " << knight.armour_class << " armour class)\n";
             return os;
         }
+
+        constexpr bool is_equal(const Knight& other) const {
+            return (this->gold == other.gold && this->weapon_class == other.weapon_class && this->armour_class == other.armour_class) ? true : false;
+        }
 };
 
 constexpr Knight TRAINEE_KNIGHT(0, 1, 1);
@@ -139,6 +143,7 @@ class Tournament {
         std::list<Knight> lost_list;
 
         void payoff(Knight& winner, Knight& loser);
+        void remove_fighting_knights(const Knight& knight);
 
     public:
         Tournament() = delete;
