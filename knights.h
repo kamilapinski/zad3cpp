@@ -94,7 +94,6 @@ class Knight {
             bool other_wins = (other.weapon_class > this->armour_class && other.armour_class >= this->weapon_class);
 
             return (this_wins) ?
-                (
                 (!other_wins) ? 
                     std::weak_ordering::greater
                 :
@@ -102,17 +101,17 @@ class Knight {
                         this->weapon_class <=> other.weapon_class 
                     : 
                         this->armour_class <=> other.armour_class)
-                )
             :
                 (other_wins) ?
                     std::weak_ordering::less
                 :
-                    ((this->armour_class >= other.weapon_class && other.armour_class >= this->weapon_class) ?
-                    std::weak_ordering::equivalent
-                    :
-                    static_cast<std::weak_ordering>(((this->armour_class == other.armour_class) ? 
-                    this->weapon_class <=> other.weapon_class : 
-                    this->armour_class <=> other.armour_class)))
+                    (this->armour_class >= other.weapon_class && other.armour_class >= this->weapon_class) ?
+                            std::weak_ordering::equivalent
+                        :
+                            static_cast<std::weak_ordering>(((this->armour_class == other.armour_class) ? 
+                                this->weapon_class <=> other.weapon_class 
+                            : 
+                                this->armour_class <=> other.armour_class))
             ;
         }
 
