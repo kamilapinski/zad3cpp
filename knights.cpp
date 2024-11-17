@@ -8,9 +8,9 @@ void Tournament::payoff(Knight& winner, Knight& loser) {
     lost_list.push_front(loser);
 }
 
-void Tournament::remove_fighting_knights(const Knight& knight_to_remove) {
-    fight_list.remove_if([&knight_to_remove](const Knight& knight) {
-        return knight.is_equal(knight_to_remove);
+void Tournament::remove_fighting_knights(const Knight& knight) {
+    fight_list.remove_if([&knight](const Knight& other) {
+        return (knight.get_gold() == other.get_gold() && knight.get_weapon_class() == other.get_weapon_class() && knight.get_armour_class() == other.get_armour_class()) ? true : false;;
     });
 }
 

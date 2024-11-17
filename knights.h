@@ -129,10 +129,6 @@ class Knight {
                << " weapon class, " << knight.armour_class << " armour class)\n";
             return os;
         }
-
-        constexpr bool is_equal(const Knight& other) const {
-            return (this->gold == other.gold && this->weapon_class == other.weapon_class && this->armour_class == other.armour_class) ? true : false;
-        }
 };
 
 constexpr Knight TRAINEE_KNIGHT(0, 1, 1);
