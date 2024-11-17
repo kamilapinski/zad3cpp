@@ -89,38 +89,38 @@ class Knight {
             return Knight(total_gold, best_weapon_class, best_armor_class);
         }
 
-        constexpr const std::strong_ordering operator<=>(const Knight& other) const {
+        constexpr const std::weak_ordering operator<=>(const Knight& other) const {
             bool this_wins = (this->weapon_class > other.armour_class && this->armour_class >= other.weapon_class);
             bool other_wins = (other.weapon_class > this->armour_class && other.armour_class >= this->weapon_class);
 
             return (this_wins) ?
                 (
                 (!other_wins) ? 
-                    std::strong_ordering::greater
+                    std::weak_ordering::greater
                 :
-                    ((this->armour_class == other.armour_class) ? this->weapon_class <=> other.weapon_class : this->armour_class <=> other.armour_class)
+                    ((this->armour_class == other.armour_class) ? static_cast<std::weak_ordering>(this->weapon_class <=> other.weapon_class) : static_cast<std::weak_ordering>(this->armour_class <=> other.armour_class))
                 )
             :
                 (other_wins) ?
-                    std::strong_ordering::less
+                    std::weak_ordering::less
                 :
                     ((this->armour_class >= other.weapon_class && other.armour_class >= this->weapon_class) ?
-                    std::strong_ordering::equal
+                    std::weak_ordering::equivalent
                     :
-                    ((this->armour_class == other.armour_class) ? this->weapon_class <=> other.weapon_class : this->armour_class <=> other.armour_class))
+                    ((this->armour_class == other.armour_class) ? static_cast<std::weak_ordering>(this->weapon_class <=> other.weapon_class) : static_cast<std::weak_ordering>(this->armour_class <=> other.armour_class)))
             ;
         }
 
         inline constexpr bool operator>(const Knight& other) const {
-            return (*this <=> other) == std::strong_ordering::greater;
+            return (*this <=> other) == std::weak_ordering::greater;
         }
 
         inline constexpr bool operator<(const Knight& other) const {
-            return (*this <=> other) == std::strong_ordering::less;
+            return (*this <=> other) == std::weak_ordering::less;
         }
 
         inline constexpr bool operator==(const Knight& other) const {
-            return (*this <=> other) == std::strong_ordering::equal;
+            return (*this <=> other) == std::weak_ordering::equivalent;
         }
 
         friend inline std::ostream& operator<<(std::ostream& os, const Knight& knight) {
