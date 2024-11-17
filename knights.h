@@ -204,7 +204,7 @@ class Tournament {
             return *this;
         }
 
-        const std::list<Knight>::iterator play() {
+        const std::list<Knight>::const_iterator play() {
             lost_list.clear();
 
             while (fight_list.size() > 1) {
@@ -223,12 +223,10 @@ class Tournament {
                 }
             }
 
-            if (fight_list.empty())
-                return fight_list.end();
             return fight_list.begin();
         }
 
-        inline const std::list<Knight>::iterator no_winner() {
+        inline const std::list<Knight>::const_iterator no_winner() const {
             return fight_list.end();
         }
 
