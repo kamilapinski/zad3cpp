@@ -2,10 +2,11 @@
 #define KNIGHTS_H
 
 #include <initializer_list>
-#include <stdint.h>
+#include <cstdint>
 #include <compare>
 #include <list>
 #include <iostream>
+#include <limits>
 
 using std::size_t;
 
@@ -140,6 +141,7 @@ class Tournament {
         void payoff(Knight& winner, Knight& loser);
 
     public:
+        Tournament() = delete;
         Tournament(std::initializer_list<Knight> s);
         Tournament(const Tournament& that);
         Tournament(Tournament&& that);
