@@ -18,7 +18,6 @@ class Knight {
         size_t armour_class;
         
     public:
-        //Knight() = delete;
         static constexpr size_t MAX_GOLD = SIZE_MAX;
         inline constexpr Knight(size_t g, size_t w, size_t a) :
             gold(g), 
@@ -73,14 +72,14 @@ class Knight {
         }
 
         inline constexpr Knight& operator+=(Knight& rhs)  {
-            take_gold(rhs.give_gold()); // Chyba tego oczekiwali.
+            take_gold(rhs.give_gold());
 
             (rhs.weapon_class > this->weapon_class) ? change_weapon(rhs.give_up_weapon()) : change_weapon(this->weapon_class);
 
             (rhs.armour_class > this->armour_class) ? change_armour(rhs.take_off_armour()) : change_armour(this->armour_class);
 
             return *this;
-        } // DONE
+        }
 
         inline constexpr Knight operator+(const Knight& k) const {
             size_t total_gold = (gold > MAX_GOLD - k.gold) ? MAX_GOLD : gold + k.gold;
@@ -88,7 +87,7 @@ class Knight {
             size_t best_armor_class = std::max(armour_class, k.armour_class);
 
             return Knight(total_gold, best_weapon_class, best_armor_class);
-        } // DONE
+        }
 
         constexpr const std::strong_ordering operator<=>(const Knight& other) const {
             bool this_wins = (this->weapon_class > other.armour_class && this->armour_class >= other.weapon_class);
@@ -139,7 +138,7 @@ class Tournament {
         std::list<Knight> lost_list;
 
         inline void payoff(Knight& winner, Knight& loser) {
-            winner += loser; // Knight musi mieć zdefiniowany ten operator
+            winner += loser;
             fight_list.push_back(winner);
             lost_list.push_front(loser);
         }
@@ -165,13 +164,11 @@ class Tournament {
         inline Tournament(const Tournament& that) : 
         fight_list(that.fight_list), 
         lost_list(that.lost_list) {
-            // done
         }
 
         inline Tournament(Tournament&& that) : 
         fight_list(std::move(that.fight_list)), 
         lost_list(std::move(that.lost_list)) {
-            // done
         }
 
         inline Tournament& operator=(const Tournament& that) {
@@ -211,12 +208,11 @@ class Tournament {
                 Knight second = fight_list.front();
                 fight_list.pop_front();
 
-                if (first > second) // Knight musi mieć zdef. ten operator
+                if (first > second)
                     payoff(first, second);
                 else if (first < second)
                     payoff(second, first);
                 else {
-                    // kolejność taka sama jak na fight_list
                     lost_list.push_front(second);
                     lost_list.push_front(first);
                 }
@@ -233,7 +229,6 @@ class Tournament {
 
         inline size_t size() const {
             return fight_list.size() + lost_list.size();
-            // chociażby dlatego lost_list nie jest typu forward_list
         }
 
         friend std::ostream& operator<<(std::ostream& os, const Tournament& tournament) {
