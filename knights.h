@@ -246,7 +246,7 @@ class Tournament {
         }
 };
 
-constexpr std::pair<size_t, size_t> max_diff_classes(std::initializer_list<Knight> list) {
+consteval std::pair<size_t, size_t> max_diff_classes(std::initializer_list<Knight> list) {
     std::pair<size_t, size_t> ans_pair = {0, 0};
     
     for (auto knight : list) {
