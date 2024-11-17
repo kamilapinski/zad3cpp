@@ -74,9 +74,15 @@ class Knight {
         inline constexpr Knight& operator+=(Knight& rhs)  {
             take_gold(rhs.give_gold());
 
-            (rhs.weapon_class > this->weapon_class) ? change_weapon(rhs.give_up_weapon()) : change_weapon(this->weapon_class);
+            (rhs.weapon_class > this->weapon_class) ? 
+                change_weapon(rhs.give_up_weapon()) 
+            : 
+                change_weapon(this->weapon_class);
 
-            (rhs.armour_class > this->armour_class) ? change_armour(rhs.take_off_armour()) : change_armour(this->armour_class);
+            (rhs.armour_class > this->armour_class) ?
+                change_armour(rhs.take_off_armour()) 
+            :
+                change_armour(this->armour_class);
 
             return *this;
         }
@@ -90,8 +96,10 @@ class Knight {
         }
 
         constexpr std::weak_ordering operator<=>(const Knight& other) const {
-            bool this_wins = (this->weapon_class > other.armour_class && this->armour_class >= other.weapon_class);
-            bool other_wins = (other.weapon_class > this->armour_class && other.armour_class >= this->weapon_class);
+            bool this_wins = (this->weapon_class > other.armour_class &&
+                              this->armour_class >= other.weapon_class);
+            bool other_wins = (other.weapon_class > this->armour_class &&
+                               other.armour_class >= this->weapon_class);
 
             return (this_wins) ?
                 (!other_wins) ? 
@@ -149,7 +157,12 @@ class Tournament {
 
         inline void remove_fighting_knights(const Knight& knight) {
             fight_list.remove_if([&knight](const Knight& other) {
-                return (knight.get_gold() == other.get_gold() && knight.get_weapon_class() == other.get_weapon_class() && knight.get_armour_class() == other.get_armour_class()) ? true : false;;
+                return (knight.get_gold() == other.get_gold() &&
+                        knight.get_weapon_class() == other.get_weapon_class() &&
+                        knight.get_armour_class() == other.get_armour_class()) ?
+                    true 
+                : 
+                    false;;
             });
         }
 
