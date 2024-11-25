@@ -142,7 +142,7 @@ class Knight {
         }
 };
 
-constexpr Knight TRAINEE_KNIGHT(0, 1, 1);
+inline constexpr Knight TRAINEE_KNIGHT(0, 1, 1);
 
 class Tournament {
     private:
