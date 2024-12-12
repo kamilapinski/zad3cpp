@@ -267,10 +267,6 @@ consteval std::pair<size_t, size_t> max_diff_classes(std::initializer_list<Knigh
         if (abs(curr_pair.first - curr_pair.second) >= abs(ans_pair.first - ans_pair.second)) {
             ans_pair = curr_pair;
         }
- 
-        /*if ((curr_pair.first - curr_pair.second) >= (ans_pair.first - ans_pair.second)) {
-            ans_pair = curr_pair;
-        }*/
     }
 
     return ans_pair;
