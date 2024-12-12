@@ -265,14 +265,7 @@ consteval std::pair<size_t, size_t> max_diff_classes(std::initializer_list<Knigh
     for (const auto& knight : list) {
         std::pair<size_t, size_t> curr_pair = {knight.get_weapon_class(), knight.get_armour_class()};
 
-        size_t curr_diff;
-
-        if (curr_pair.first >= curr_pair.second)
-            curr_diff = curr_pair.first - curr_pair.second;
-        else
-            curr_diff = curr_pair.second - curr_pair.first;
-
-        if (ans_diff <= curr_diff) {
+        if (abs(curr_pair.first - curr_pair.second) >= abs(ans_pair.first - ans_pair.second)) {
             ans_pair = curr_pair;
             ans_diff = curr_diff;
         }
