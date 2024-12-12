@@ -260,7 +260,6 @@ class Tournament {
 
 consteval std::pair<size_t, size_t> max_diff_classes(std::initializer_list<Knight> list) {
     std::pair<size_t, size_t> ans_pair = {0, 0};
-    size_t ans_diff = 0;
 
     for (auto knight : list) {
         std::pair<size_t, size_t> curr_pair = {knight.get_weapon_class(), knight.get_armour_class()};
